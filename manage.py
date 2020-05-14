@@ -67,7 +67,8 @@ def opt_startproject(projectName, appName):
 
 
 def opt_startapp(projectName, appName):
-    log.info("startapp: {}".format(projectName, appName))
+    log.info("startapp: {} {}".format(projectName, appName))
+    raise NotImplementedError()
 
 
 def _assert_cmd_exist(cmd):
