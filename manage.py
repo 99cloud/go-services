@@ -44,34 +44,30 @@ def mv(old, new, filePath):
         os.system(cmdStr)
 
 
-# def opt_testTransferFromMepServices():
-#     os.system(r'rm -rf {} && cp -r {} {} && rm -rf {} {}'.format(
-#         os.path.join(BASE_DIR, 'template'),
-#         os.path.join(BASE_DIR, 'mep-services'),
-#         os.path.join(BASE_DIR, 'template'),
-#         os.path.join(BASE_DIR, 'template', 'dist'),
-#         os.path.join(BASE_DIR, 'template', 'doc')
-#         ))
-#     for root, dirs, files in os.walk(os.path.join(BASE_DIR, 'template')):
-#         for name in dirs:
-#             absPath = os.path.join(root, name)
-#             mv('mep', APP_NAME, absPath)
-#     for root, dirs, files in os.walk(os.path.join(BASE_DIR, 'template')):
-#         for name in files:
-#             absPath = os.path.join(root, name)
-#             sed('mep-services', PROJECT_NAME, absPath)
-#             sed('mep_lower', APP_LOWER_NAME, absPath)
-#             sed('mep', APP_NAME, absPath)
-#             sed('MEP', APP_UPPER_NAME, absPath)
-#             mv('mep', APP_NAME, absPath)
+def opt_startproject(projectName, appName):
+    os.system(r'rm -rf {} && cp -r {} {} && rm -rf {} {}'.format(
+        os.path.join(BASE_DIR, 'output'),
+        os.path.join(BASE_DIR, 'template'),
+        os.path.join(BASE_DIR, 'output'),
+        os.path.join(BASE_DIR, 'output', 'dist'),
+        os.path.join(BASE_DIR, 'output', 'doc')
+        ))
+    for root, dirs, files in os.walk(os.path.join(BASE_DIR, 'output')):
+        for name in dirs:
+            absPath = os.path.join(root, name)
+            mv(APP_NAME, appName, absPath)
+    for root, dirs, files in os.walk(os.path.join(BASE_DIR, 'output')):
+        for name in files:
+            absPath = os.path.join(root, name)
+            sed(PROJECT_NAME, projectName, absPath)
+            sed(APP_LOWER_NAME, appName.lower(), absPath)
+            sed(APP_NAME, appName, absPath)
+            sed(APP_UPPER_NAME, appName.upper(), absPath)
+            mv(APP_NAME, appName, absPath)
 
 
-def opt_startproject(projectName):
-    log.info('startproject: {}'.format(projectName))
-
-
-def opt_startapp(appName):
-    log.info("startapp: {}".format(appName))
+def opt_startapp(projectName, appName):
+    log.info("startapp: {}".format(projectName, appName))
 
 
 def _assert_cmd_exist(cmd):
