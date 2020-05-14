@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -10,8 +11,10 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('manage.py')
 
 UUID = '46ea591951824d8e9376b0f98fe4d48a'
-PROJECT_NAME = 'PROJECT_NAME-' + UUID
-APP_NAME = 'APP_NAME-' + UUID
+PROJECT_NAME = 'PROJECT_' + UUID
+APP_NAME = 'APP_' + UUID
+APP_UPPER_NAME = 'APP_UPPER_' + UUID
+APP_LOWER_NAME = 'app_lower_' + UUID
 
 def showUsage():
     print('''Usage:
@@ -22,14 +25,45 @@ def showUsage():
     sys.exit()
 
 
-def opt_test():
-    os.system(r'cp -r {}')
-    for root, dirs, files in os.walk(os.path.join(BASE_DIR, 'template')):
-        for name in files:
-            os.system()
-            print(os.path.join(root, name))
-        for name in dirs:
-            print(os.path.join(root, name))
+def sed(old, new, filePath):
+    ignoreRegex = re.compile(r'\.((db)|(png)|(js.map))$')
+    if ignoreRegex.search(filePath):
+        return
+    try:
+        lines = [i.replace(old, new) for i in open(filePath) if not ignoreRegex.search(filePath)]
+        open(filePath, 'w').writelines(lines)
+    except UnicodeDecodeError as e:
+        log.warning('old = {}, new = {}, filePath = {}'.format(old, new, filePath))
+        log.warning(e)
+
+
+def mv(old, new, filePath):
+    if old in filePath:
+        cmdStr = r'mv {} {}'.format(filePath, filePath.replace(old, new))
+        log.debug(cmdStr)
+        os.system(cmdStr)
+
+
+# def opt_testTransferFromMepServices():
+#     os.system(r'rm -rf {} && cp -r {} {} && rm -rf {} {}'.format(
+#         os.path.join(BASE_DIR, 'template'),
+#         os.path.join(BASE_DIR, 'mep-services'),
+#         os.path.join(BASE_DIR, 'template'),
+#         os.path.join(BASE_DIR, 'template', 'dist'),
+#         os.path.join(BASE_DIR, 'template', 'doc')
+#         ))
+#     for root, dirs, files in os.walk(os.path.join(BASE_DIR, 'template')):
+#         for name in dirs:
+#             absPath = os.path.join(root, name)
+#             mv('mep', APP_NAME, absPath)
+#     for root, dirs, files in os.walk(os.path.join(BASE_DIR, 'template')):
+#         for name in files:
+#             absPath = os.path.join(root, name)
+#             sed('mep-services', PROJECT_NAME, absPath)
+#             sed('mep_lower', APP_LOWER_NAME, absPath)
+#             sed('mep', APP_NAME, absPath)
+#             sed('MEP', APP_UPPER_NAME, absPath)
+#             mv('mep', APP_NAME, absPath)
 
 
 def opt_startproject(projectName):

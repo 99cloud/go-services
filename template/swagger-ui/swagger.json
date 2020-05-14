@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "api server OpenAPI",
+    "title": "api server",
+    "contact": {
+      "name": "api server",
+      "url": "http://localhost:8080",
+      "email": "example@example.com"
+    },
+    "license": {
+      "name": "Apache",
+      "url": "http://www.apache.org/licenses/"
+    },
+    "version": "1.0.0",
+    "x-taggroups": [
+      {
+        "name": "Resources",
+        "tags": [
+          "Test Resources"
+        ]
+      }
+    ]
+  },
+  "paths": {
+    "/liveness/v1/echo": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "liveness: echo"
+        ],
+        "summary": "This method is used to echo.",
+        "operationId": "Echo",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "It is used to indicate nonspecific success. The response body contains a representation of the resource.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. It is used to indicate that incorrect parameters were passed to the request.",
+            "schema": {
+              "$ref": "#/definitions/model.CommonResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "model.CommonResponse": {
+      "required": [
+        "type",
+        "title",
+        "status",
+        "detail",
+        "instance"
+      ],
+      "properties": {
+        "detail": {
+          "type": "string"
+        },
+        "instance": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}
