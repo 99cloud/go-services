@@ -9,7 +9,7 @@ const (
 	ApiRootPath = ""
 )
 
-// container holds all webservice of APP_46ea591951824d8e9376b0f98fe4d48a
+// container holds all webservice
 var Container = restful.NewContainer()
 
 type ContainerBuilder []func(c *restful.Container) error

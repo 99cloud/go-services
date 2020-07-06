@@ -21,7 +21,7 @@ var dbtype string
 var dbport string
 
 func init() {
-	flag.StringVar(&dbname, "db-name", "/tmp/dbAPP_46ea591951824d8e9376b0f98fe4d48a", "dbname")
+	flag.StringVar(&dbname, "db-name", "/tmp/PROJECT_46ea591951824d8e9376b0f98fe4d48a.sqlite", "dbname")
 	flag.StringVar(&dbhost, "db-host", "", "dbhost")
 	flag.StringVar(&dbusername, "db-username", "", "dbusername")
 	flag.StringVar(&dbpassword, "db-password", "", "dbpassword")

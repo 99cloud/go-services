@@ -6,6 +6,7 @@ import (
 
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/cmd/APP_46ea591951824d8e9376b0f98fe4d48a/app/options"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/internal/APP_46ea591951824d8e9376b0f98fe4d48a"
+	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/internal/APP_46ea591951824d8e9376b0f98fe4d48a/task"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/client"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/logger"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/server"
@@ -13,7 +14,6 @@ import (
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/server/filter"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/server/runtime"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/server/version"
-	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/task"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/utils/signals"
 
 	"github.com/spf13/cobra"

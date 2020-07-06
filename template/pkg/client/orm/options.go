@@ -27,7 +27,7 @@ func NewOrmOptions() *OrmOptions {
 		Username:              "",
 		Password:              "",
 		DBType:                "sqlite3",
-		DBName:                "/root/db/dbAPP_46ea591951824d8e9376b0f98fe4d48a",
+		DBName:                "/root/db/PROJECT_46ea591951824d8e9376b0f98fe4d48a.sqlite",
 		DBPort:                "",
 		MaxIdleConnections:    100,
 		MaxOpenConnections:    100,

@@ -12,6 +12,8 @@ log = logging.getLogger('manage.py')
 
 UUID = '46ea591951824d8e9376b0f98fe4d48a'
 PROJECT_NAME = 'PROJECT_' + UUID
+PROJECT_UPPER_NAME = 'PROJECT_UPPER_' + UUID
+PROJECT_LOWER_NAME = 'project_lower_' + UUID
 APP_NAME = 'APP_' + UUID
 APP_UPPER_NAME = 'APP_UPPER_' + UUID
 APP_LOWER_NAME = 'app_lower_' + UUID
@@ -19,7 +21,7 @@ APP_LOWER_NAME = 'app_lower_' + UUID
 def showUsage():
     print('''Usage:
     python manage.py <option>
-    python manage.py startproject <project-name> <default-app-name>
+    python manage.py startproject <project-name> <api-app-name>
     python manage.py startapp <project-name> <app-name>
     ''')
     sys.exit()
@@ -60,16 +62,33 @@ def opt_startproject(projectName, appName):
         for name in files:
             absPath = os.path.join(root, name)
             sed(PROJECT_NAME, projectName, absPath)
-            sed(APP_LOWER_NAME, appName.lower(), absPath)
+            sed(PROJECT_LOWER_NAME, projectName.lower(), absPath)
+            sed(PROJECT_UPPER_NAME, projectName.upper(), absPath)
             sed(APP_NAME, appName, absPath)
+            sed(APP_LOWER_NAME, appName.lower(), absPath)
             sed(APP_UPPER_NAME, appName.upper(), absPath)
+            mv(PROJECT_NAME, projectName, absPath)
             mv(APP_NAME, appName, absPath)
 
 
 def opt_startapp(projectName, appName):
-    log.info("startapp: {} {}".format(projectName, appName))
-    raise NotImplementedError()
-
+    os.system(r'cp -r {} {} && cp -r {} {} && cp -r {} {}'.format(
+        os.path.join(BASE_DIR, 'template', 'build', APP_NAME), os.path.join(BASE_DIR, 'output', 'build'),
+        os.path.join(BASE_DIR, 'template', 'cmd', APP_NAME), os.path.join(BASE_DIR, 'output', 'cmd'),
+        os.path.join(BASE_DIR, 'template', 'internal', APP_NAME), os.path.join(BASE_DIR, 'output', 'internal')
+        ))
+    for root, dirs, files in os.walk(os.path.join(BASE_DIR, 'output')):
+        for name in dirs:
+            absPath = os.path.join(root, name)
+            mv(APP_NAME, appName, absPath)
+    for root, dirs, files in os.walk(os.path.join(BASE_DIR, 'output')):
+        for name in files:
+            absPath = os.path.join(root, name)
+            sed(PROJECT_NAME, projectName, absPath)
+            sed(APP_LOWER_NAME, appName.lower(), absPath)
+            sed(APP_NAME, appName, absPath)
+            sed(APP_UPPER_NAME, appName.upper(), absPath)
+            mv(APP_NAME, appName, absPath)
 
 def _assert_cmd_exist(cmd):
     try:

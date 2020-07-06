@@ -3,7 +3,7 @@
 ## Create a project
 
 ```bash
-python manage.py startproject <project-name> <default-app-name>
+python manage.py startproject <project-name> <api-app-name>
 ```
 
 ## Add another app

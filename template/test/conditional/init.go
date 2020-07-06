@@ -14,7 +14,7 @@ import (
 var dbname, sshHost string
 
 func init() {
-	flag.StringVar(&dbname, "db-name", "/tmp/dbAPP_46ea591951824d8e9376b0f98fe4d48a", "dbname")
+	flag.StringVar(&dbname, "db-name", "/tmp/PROJECT_46ea591951824d8e9376b0f98fe4d48a.sqlite", "dbname")
 	flag.StringVar(&sshHost, "ssh-host", "172.16.30.34", "ssh-host")
 	flag.Parse()
 	go func() {

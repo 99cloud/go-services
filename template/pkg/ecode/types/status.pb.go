@@ -81,7 +81,7 @@ func (m *Status) GetDetails() []*any.Any {
 }
 
 func init() {
-	proto.RegisterType((*Status)(nil), "APP_46ea591951824d8e9376b0f98fe4d48a_service.Status")
+	proto.RegisterType((*Status)(nil), "PROJECT_46ea591951824d8e9376b0f98fe4d48a_service.Status")
 }
 
 func init() { proto.RegisterFile("status.proto", fileDescriptor_dfe4fce6682daf5b) }
