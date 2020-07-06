@@ -28,7 +28,7 @@ def showUsage():
 
 
 def sed(old, new, filePath):
-    ignoreRegex = re.compile(r'\.((db)|(png)|(js.map))$')
+    ignoreRegex = re.compile(r'(\.((db)|(png)|(js.map))$)|(\.git)|(dist)')
     if ignoreRegex.search(filePath):
         return
     try:
