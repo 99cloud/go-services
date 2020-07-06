@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/internal/APP_46ea591951824d8e9376b0f98fe4d48a/model"
-	APP_46ea591951824d8e9376b0f98fe4d48aUtil "PROJECT_46ea591951824d8e9376b0f98fe4d48a/internal/APP_46ea591951824d8e9376b0f98fe4d48a/utils"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/constants"
+	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/schema"
+	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/utils/httputils"
 
 	"github.com/emicklei/go-restful"
 )
@@ -20,7 +20,7 @@ type MockResult struct {
 func Echo(req *restful.Request, resp *restful.Response) {
 	body := json.RawMessage{}
 	if err := req.ReadEntity(&body); err != nil {
-		APP_46ea591951824d8e9376b0f98fe4d48aUtil.WriteCommonResponse(resp, http.StatusBadRequest, err.Error(), constants.TAG_COMMON_echo)
+		httputils.WriteCommonResponse(resp, http.StatusBadRequest, err.Error(), constants.TAG_COMMON_echo)
 		return
 	}
 	resp.WriteAsJson(body)
@@ -31,9 +31,9 @@ func MockError(req *restful.Request, resp *restful.Response) {
 }
 
 func MockPostBack(req *restful.Request, resp *restful.Response, result bool) *MockResult {
-	body := model.CommonResponse{}
+	body := schema.CommonResponse{}
 	if err := req.ReadEntity(&body); err != nil {
-		APP_46ea591951824d8e9376b0f98fe4d48aUtil.WriteCommonResponse(resp, http.StatusBadRequest, err.Error(), constants.TAG_COMMON_mock)
+		httputils.WriteCommonResponse(resp, http.StatusBadRequest, err.Error(), constants.TAG_COMMON_mock)
 		return nil
 	}
 

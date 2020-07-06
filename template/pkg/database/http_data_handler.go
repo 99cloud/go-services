@@ -13,10 +13,10 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/jinzhu/gorm"
 
-	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/internal/APP_46ea591951824d8e9376b0f98fe4d48a/schema"
-	APP_46ea591951824d8e9376b0f98fe4d48aUtil "PROJECT_46ea591951824d8e9376b0f98fe4d48a/internal/APP_46ea591951824d8e9376b0f98fe4d48a/utils"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/constants"
+	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/httputils"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/logger"
+	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/schema"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/server/errors"
 )
 
@@ -90,7 +90,7 @@ func (h *HttpDataHandle) handlePanic() {
 	if err := recover(); err != nil {
 		if !h.returned {
 			h.returned = true
-			APP_46ea591951824d8e9376b0f98fe4d48aUtil.WriteCommonResponse(h.resp, h.errorCode, h.errorMsg, h.uri)
+			httputils.WriteCommonResponse(h.resp, h.errorCode, h.errorMsg, h.uri)
 		}
 		h.setDefaultErrorCodeMsg()
 		panic(err)

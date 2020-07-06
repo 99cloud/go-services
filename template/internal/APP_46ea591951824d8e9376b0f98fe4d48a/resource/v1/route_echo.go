@@ -2,8 +2,8 @@ package v1
 
 import (
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/internal/APP_46ea591951824d8e9376b0f98fe4d48a/controller/resources"
-	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/internal/APP_46ea591951824d8e9376b0f98fe4d48a/model"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/constants"
+	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/schema"
 	"encoding/json"
 	"net/http"
 
@@ -30,7 +30,7 @@ var echo = []Route{
 			{
 				http.StatusBadRequest,
 				constants.HTTP_400,
-				model.CommonResponse{},
+				schema.CommonResponse{},
 			},
 		},
 		Tags: []string{constants.TAG_COMMON_echo},

@@ -1,9 +1,9 @@
-package utils
+package httputils
 
 import (
-	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/internal/APP_46ea591951824d8e9376b0f98fe4d48a/model"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/constants"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/logger"
+	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/schema"
 	"fmt"
 	"net/http"
 
@@ -13,7 +13,7 @@ import (
 func WriteCommonResponse(resp *restful.Response, status int, message, apiName string) {
 	logger.Debug(nil, message)
 
-	body := model.CommonResponse{
+	body := schema.CommonResponse{
 		Type:     "Common",
 		Title:    "Error",
 		Status:   status,
