@@ -41,7 +41,7 @@ fmt:
 image:
 	for app in $(apps) ;\
 	do \
-		docker build -f build/$$app/Dockerfile --build-arg REPO_URL=$(REPO_URL) --build-arg BRANCH=$(BRANCH) --build-arg COMMIT_REF=$(COMMIT_REF) --build-arg VERSION=$(VERSION) -t ${IMG_PREFIX}-$$app:${TAG} . \
+		docker build -f build/$$app/Dockerfile --build-arg REPO_URL=$(REPO_URL) --build-arg BRANCH=$(BRANCH) --build-arg COMMIT_REF=$(COMMIT_REF) --build-arg VERSION=$(VERSION) -t ${IMG_PREFIX}-$$app:${TAG} . ;\
 	done
 
 .PHONY: test
