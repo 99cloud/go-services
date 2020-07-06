@@ -19,8 +19,8 @@ APP_LOWER_NAME = 'app_lower_' + UUID
 def showUsage():
     print('''Usage:
     python manage.py <option>
-    python manage.py startproject <project-name>
-    python manage.py startapp <app-name>
+    python manage.py startproject <project-name> <default-app-name>
+    python manage.py startapp <project-name> <app-name>
     ''')
     sys.exit()
 
