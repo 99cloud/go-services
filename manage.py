@@ -21,8 +21,8 @@ APP_LOWER_NAME = 'app_lower_' + UUID
 def showUsage():
     print('''Usage:
     python manage.py <option>
-    python manage.py startproject <project-name> <api-app-name>
-    python manage.py startapp <project-name> <app-name>
+    python manage.py startproject <project-name> <api-app-name> [<output-dir>]
+    python manage.py startapp <project-name> <app-name> [<output-dir>]
     ''')
     sys.exit()
 
@@ -46,19 +46,20 @@ def mv(old, new, filePath):
         os.system(cmdStr)
 
 
-def opt_startproject(projectName, appName):
+def opt_startproject(projectName, appName, base=os.path.join(BASE_DIR, 'output')):
     os.system(r'rm -rf {} && cp -r {} {} && rm -rf {} {}'.format(
-        os.path.join(BASE_DIR, 'output'),
+        base,
         os.path.join(BASE_DIR, 'template'),
-        os.path.join(BASE_DIR, 'output'),
-        os.path.join(BASE_DIR, 'output', 'dist'),
-        os.path.join(BASE_DIR, 'output', 'doc')
+        base,
+        os.path.join(base, 'dist'),
+        os.path.join(base, 'doc')
         ))
-    for root, dirs, files in os.walk(os.path.join(BASE_DIR, 'output')):
+    for root, dirs, files in os.walk(base):
         for name in dirs:
             absPath = os.path.join(root, name)
+            mv(PROJECT_NAME, projectName, absPath)
             mv(APP_NAME, appName, absPath)
-    for root, dirs, files in os.walk(os.path.join(BASE_DIR, 'output')):
+    for root, dirs, files in os.walk(base):
         for name in files:
             absPath = os.path.join(root, name)
             sed(PROJECT_NAME, projectName, absPath)
@@ -71,23 +72,25 @@ def opt_startproject(projectName, appName):
             mv(APP_NAME, appName, absPath)
 
 
-def opt_startapp(projectName, appName):
+def opt_startapp(projectName, appName, base=os.path.join(BASE_DIR, 'output')):
     os.system(r'cp -r {} {} && cp -r {} {} && cp -r {} {}'.format(
-        os.path.join(BASE_DIR, 'template', 'build', APP_NAME), os.path.join(BASE_DIR, 'output', 'build'),
-        os.path.join(BASE_DIR, 'template', 'cmd', APP_NAME), os.path.join(BASE_DIR, 'output', 'cmd'),
-        os.path.join(BASE_DIR, 'template', 'internal', APP_NAME), os.path.join(BASE_DIR, 'output', 'internal')
+        os.path.join(BASE_DIR, 'template', 'build', APP_NAME), os.path.join(base, 'build'),
+        os.path.join(BASE_DIR, 'template', 'cmd', APP_NAME), os.path.join(base, 'cmd'),
+        os.path.join(BASE_DIR, 'template', 'internal', APP_NAME), os.path.join(base, 'internal')
         ))
-    for root, dirs, files in os.walk(os.path.join(BASE_DIR, 'output')):
+    for root, dirs, files in os.walk(base):
         for name in dirs:
             absPath = os.path.join(root, name)
+            mv(PROJECT_NAME, projectName, absPath)
             mv(APP_NAME, appName, absPath)
-    for root, dirs, files in os.walk(os.path.join(BASE_DIR, 'output')):
+    for root, dirs, files in os.walk(base):
         for name in files:
             absPath = os.path.join(root, name)
             sed(PROJECT_NAME, projectName, absPath)
             sed(APP_LOWER_NAME, appName.lower(), absPath)
             sed(APP_NAME, appName, absPath)
             sed(APP_UPPER_NAME, appName.upper(), absPath)
+            mv(PROJECT_NAME, projectName, absPath)
             mv(APP_NAME, appName, absPath)
 
 def _assert_cmd_exist(cmd):
