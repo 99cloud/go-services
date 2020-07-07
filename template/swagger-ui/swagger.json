@@ -62,7 +62,7 @@
           "400": {
             "description": "Bad Request. It is used to indicate that incorrect parameters were passed to the request.",
             "schema": {
-              "$ref": "#/definitions/model.CommonResponse"
+              "$ref": "#/definitions/schema.CommonResponse"
             }
           }
         }
@@ -70,7 +70,7 @@
     }
   },
   "definitions": {
-    "model.CommonResponse": {
+    "schema.CommonResponse": {
       "required": [
         "type",
         "title",

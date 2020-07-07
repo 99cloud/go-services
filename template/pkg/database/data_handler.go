@@ -9,12 +9,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-var ormRegisterList = map[string]interface{}{}
-
-func init() {
-	// register all model that needs to create db table
-	// ormRegisterList[reflect.TypeOf(model.GormDBTest{}).Name()] = model.GormDBTest{}
-}
+var OrmRegisterList = map[string]interface{}{}
 
 type IDBQueryConditionOperator interface {
 	ToQuery() string
@@ -256,7 +251,7 @@ func GetFieldDbColumnName(model interface{}, fieldName string) (string, error) {
 }
 
 func OrmRegister(db *gorm.DB) {
-	for _, model := range ormRegisterList {
+	for _, model := range OrmRegisterList {
 		db.AutoMigrate(model)
 	}
 }
