@@ -47,6 +47,9 @@ def mv(old, new, filePath):
 
 
 def opt_startproject(projectName, appName, base=os.path.join(BASE_DIR, 'output')):
+    if os.path.exists(base) and base != os.path.join(BASE_DIR, 'output'):
+        log.error("directory <%s> already exist!" % base)
+        return
     os.system(r'rm -rf {} && cp -r {} {} && rm -rf {} {}'.format(
         base,
         os.path.join(BASE_DIR, 'template'),
