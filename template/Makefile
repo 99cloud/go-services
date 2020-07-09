@@ -16,6 +16,7 @@ PROJECT_UPPER_46ea591951824d8e9376b0f98fe4d48a_DB_TYPE ?= "sqlite3"
 PROJECT_UPPER_46ea591951824d8e9376b0f98fe4d48a_DB_PORT ?= ""
 
 VERSION ?= $(shell git rev-parse --short HEAD)-$(shell date -u '+%Y%m%d%I%M%S')
+BUILDX ?= false
 
 .PHONY: build
 build:
@@ -39,10 +40,17 @@ fmt:
 
 .PHONY: image
 image:
+ifeq ($(BUILDX), false)
 	for app in $(apps) ;\
 	do \
 		docker build -f build/$$app/Dockerfile --build-arg REPO_URL=$(REPO_URL) --build-arg BRANCH=$(BRANCH) --build-arg COMMIT_REF=$(COMMIT_REF) --build-arg VERSION=$(VERSION) -t ${IMG_PREFIX}-$$app:${TAG} . ;\
 	done
+else
+	for app in $(apps) ;\
+	do \
+		docker buildx build -f build/$$app/Dockerfile --build-arg REPO_URL=$(REPO_URL) --build-arg BRANCH=$(BRANCH) --build-arg COMMIT_REF=$(COMMIT_REF) --build-arg VERSION=$(VERSION) --platform linux/amd64,linux/arm64 --push -t ${IMG_PREFIX}-$$app:${TAG} . ;\
+	done
+endif
 
 .PHONY: test
 test:
