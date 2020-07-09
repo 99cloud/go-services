@@ -5,7 +5,7 @@ RUN apk add gcc musl-dev \
     && mkdir /app
 WORKDIR /app
 COPY . /app
-RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o APP_46ea591951824d8e9376b0f98fe4d48a -a -ldflags "-w -s -X PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/server/version.Version=${VERSION}" ./cmd/APP_46ea591951824d8e9376b0f98fe4d48a
+RUN CGO_ENABLED=1 GOOS=linux go build -o APP_46ea591951824d8e9376b0f98fe4d48a -a -ldflags "-w -s -X PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/server/version.Version=${VERSION}" ./cmd/APP_46ea591951824d8e9376b0f98fe4d48a
 
 FROM alpine:3.10
 ARG REPO_URL
