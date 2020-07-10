@@ -23,6 +23,7 @@ def showUsage():
     python manage.py <option>
     python manage.py startproject <project-name> <api-app-name> [<output-dir>]
     python manage.py startapp <project-name> <app-name> [<output-dir>]
+    python manage.py renameapp <old-name> <new-name> [<output-dir>]
     ''')
     sys.exit()
 
@@ -95,6 +96,19 @@ def opt_startapp(projectName, appName, base=os.path.join(BASE_DIR, 'output')):
             sed(APP_UPPER_NAME, appName.upper(), absPath)
             mv(PROJECT_NAME, projectName, absPath)
             mv(APP_NAME, appName, absPath)
+
+def opt_renameapp(oldName, newName, base=os.path.join(BASE_DIR, 'output')):
+    for root, dirs, files in os.walk(base):
+        for name in dirs:
+            absPath = os.path.join(root, name)
+            mv(oldName, newName, absPath)
+    for root, dirs, files in os.walk(base):
+        for name in files:
+            absPath = os.path.join(root, name)
+            sed(oldName.lower(), newName.lower(), absPath)
+            sed(oldName, newName, absPath)
+            sed(oldName.upper(), newName.upper(), absPath)
+            mv(oldName, newName, absPath)
 
 def _assert_cmd_exist(cmd):
     try:
