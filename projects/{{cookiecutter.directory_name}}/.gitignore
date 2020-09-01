@@ -1,0 +1,8 @@
+.idea
+dist
+.DS_Store
+*.db
+
+// vscode
+.vscode
+__debug_bin
