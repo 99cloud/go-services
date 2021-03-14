@@ -66,4 +66,4 @@ test:
 full-test:
 	rm -rf $(PROJECT_UPPER_46ea591951824d8e9376b0f98fe4d48a_DB_NAME)
 	CGO_ENABLED=1 go test ./test/controller -args db-name=$(PROJECT_UPPER_46ea591951824d8e9376b0f98fe4d48a_DB_NAME)
-	CGO_ENABLED=1 go test ./test/conditional -args db-name=$(PROJECT_UPPER_46ea591951824d8e9376b0f98fe4d48a_DB_NAME) ssh-host=172.16.30.34
+	CGO_ENABLED=1 go test ./test/conditional -args db-name=$(PROJECT_UPPER_46ea591951824d8e9376b0f98fe4d48a_DB_NAME)

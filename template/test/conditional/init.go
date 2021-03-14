@@ -4,18 +4,18 @@ import (
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/cmd/APP_46ea591951824d8e9376b0f98fe4d48a/app"
 	testUtil "PROJECT_46ea591951824d8e9376b0f98fe4d48a/test/util"
 	"encoding/json"
-	flag "github.com/spf13/pflag"
 	"log"
 	"strings"
 	"testing"
 	"time"
+
+	flag "github.com/spf13/pflag"
 )
 
-var dbname, sshHost string
+var dbname string
 
 func init() {
 	flag.StringVar(&dbname, "db-name", "/tmp/PROJECT_46ea591951824d8e9376b0f98fe4d48a.sqlite", "dbname")
-	flag.StringVar(&sshHost, "ssh-host", "172.16.30.34", "ssh-host")
 	flag.Parse()
 	go func() {
 		cmd := app.NewAPIServerCommand()
@@ -27,7 +27,7 @@ func init() {
 			}
 			cmd.SetArgs(cmdFlags)
 		} else {
-			cmd.SetArgs([]string{"--db-name", dbname, "--ssh-host", sshHost})
+			cmd.SetArgs([]string{"--db-name", dbname})
 		}
 		if err := cmd.Execute(); err != nil {
 			log.Fatalln(err)

@@ -14,9 +14,11 @@ UUID = '46ea591951824d8e9376b0f98fe4d48a'
 PROJECT_NAME = 'PROJECT_' + UUID
 PROJECT_UPPER_NAME = 'PROJECT_UPPER_' + UUID
 PROJECT_LOWER_NAME = 'project_lower_' + UUID
+PROJECT_TITLE_NAME = 'Project_Title_' + UUID
 APP_NAME = 'APP_' + UUID
 APP_UPPER_NAME = 'APP_UPPER_' + UUID
 APP_LOWER_NAME = 'app_lower_' + UUID
+APP_TITLE_NAME = 'App_Title_' + UUID
 
 def showUsage():
     print('''Usage:
@@ -69,9 +71,11 @@ def opt_startproject(projectName, appName, base=os.path.join(BASE_DIR, 'output')
             sed(PROJECT_NAME, projectName, absPath)
             sed(PROJECT_LOWER_NAME, projectName.lower(), absPath)
             sed(PROJECT_UPPER_NAME, projectName.upper(), absPath)
+            sed(PROJECT_TITLE_NAME, projectName.title(), absPath)
             sed(APP_NAME, appName, absPath)
             sed(APP_LOWER_NAME, appName.lower(), absPath)
             sed(APP_UPPER_NAME, appName.upper(), absPath)
+            sed(APP_TITLE_NAME, appName.title(), absPath)
             mv(PROJECT_NAME, projectName, absPath)
             mv(APP_NAME, appName, absPath)
 

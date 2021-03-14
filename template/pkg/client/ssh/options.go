@@ -19,7 +19,7 @@ type SshOptions struct {
 	AnsibleCommand     string `json:"ansible-command" yaml:"ansible-command"`
 }
 
-func NewOrmOptions() *SshOptions {
+func NewSSHOptions() *SshOptions {
 	return &SshOptions{
 		Host:               "172.16.30.34",
 		AuthenticationMode: "basic",

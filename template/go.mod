@@ -13,7 +13,6 @@ require (
 	github.com/jasonlvhit/gocron v0.0.0-20200323211822-1a413f9a41a2
 	github.com/jinzhu/gorm v1.9.12
 	github.com/pkg/errors v0.9.1
-	github.com/simonyangcj/simple-ssh-toolkit v0.0.0-20200401081915-2d607484f2f4
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.6.3

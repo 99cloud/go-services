@@ -6,6 +6,7 @@
 output
 .DS_Store
 .idea
+.vscode
 
 # User-specific files
 *.rsuser

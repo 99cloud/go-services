@@ -3,9 +3,9 @@ package config
 import (
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/client/orm"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/client/redis"
-	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/client/ssh"
 	"PROJECT_46ea591951824d8e9376b0f98fe4d48a/pkg/logger"
 	"fmt"
+
 	"github.com/spf13/viper"
 )
 
@@ -25,14 +25,12 @@ var (
 type Config struct {
 	OrmOptions   *orm.OrmOptions     `json:"orm,omitempty" yaml:"orm,omitempty" mapstructure:"orm"`
 	RedisOptions *redis.RedisOptions `json:"redis,omitempty" yaml:"redis,omitempty" mapstructure:"redis"`
-	SshOptions   *ssh.SshOptions     `json:"ssh,omitempty" yaml:"ssh,omitempty" mapstructure:"ssh"`
 }
 
 func newConfig() *Config {
 	return &Config{
 		OrmOptions:   orm.NewOrmOptions(),
 		RedisOptions: redis.NewRedisOptions(),
-		SshOptions:   ssh.NewOrmOptions(),
 	}
 }
 
@@ -50,10 +48,6 @@ func (c *Config) Apply(conf *Config) {
 	if conf.OrmOptions != nil {
 		conf.OrmOptions.ApplyTo(c.OrmOptions)
 	}
-
-	if conf.SshOptions != nil {
-		conf.SshOptions.ApplyTo(c.SshOptions)
-	}
 }
 
 func (c *Config) stripEmptyOptions() {
@@ -63,10 +57,6 @@ func (c *Config) stripEmptyOptions() {
 
 	if c.RedisOptions != nil && c.RedisOptions.RedisURL == "" {
 		c.RedisOptions = nil
-	}
-
-	if c.SshOptions != nil && c.SshOptions.Host == "" {
-		c.SshOptions = nil
 	}
 }
 
